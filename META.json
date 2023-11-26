@@ -1,0 +1,40 @@
+{
+   "name": "pg_extension_template",
+   "abstract": "FIXME",
+   "version": "__VERSION__",
+   "maintainer": "Maintainer Name <address@domain.tld>",
+   "license": "postgresql",
+   "release_status": "stable",
+   "provides": {
+      "hypopg": {
+         "abstract": "FIXME.",
+         "file": "pg_extensions_template.sql",
+         "docfile": "README.md",
+         "version": "__VERSION__"
+      }
+   },
+   "resources": {
+      "bugtracker": {
+         "web": "http://github.com/FIXME/FIXME/issues/"
+      },
+      "repository": {
+        "url":  "git://github.com/FIXME/FIXME.git",
+        "web":  "http://github.com/FIXME/FIXME/",
+        "type": "git"
+      }
+   },
+   "prereqs": {
+       "runtime": {
+           "requires": {
+               "PostgreSQL": "10.0"
+           }
+       }
+   },
+   "generated_by": "Maintainer Name",
+   "meta-spec": {
+      "version": "1.0.0",
+      "url": "http://pgxn.org/meta/spec.txt"
+   },
+   "tags": [
+   ]
+}

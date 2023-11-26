@@ -1,0 +1,10 @@
+*.sw?
+*.gcno
+*.gcda
+*.gcov.out
+*.bc
+lcov*.info
+*.o
+*.so
+*.dylib
+results/

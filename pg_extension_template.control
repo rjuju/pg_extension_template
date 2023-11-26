@@ -1,0 +1,5 @@
+# pg_extension_template extension
+comment = 'FIXME'
+default_version = '0.0.1'
+module_pathname = '$libdir/pg_extension_template'
+relocatable = false

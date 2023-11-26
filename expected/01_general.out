@@ -1,0 +1,7 @@
+-- test the SRF
+SELECT * FROM pg_extension_template();
+ ok |   value   
+----+-----------
+ t  | some text
+(1 row)
+
