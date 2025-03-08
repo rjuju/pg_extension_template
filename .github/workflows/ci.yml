@@ -1,0 +1,58 @@
+name: Build and test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: sh
+
+    strategy:
+      matrix:
+        pgversion:
+          - 10
+          - 11
+          - 12
+          - 13
+          - 14
+          - 15
+          - 16
+          - 17
+
+    env:
+      PGVERSION: ${{ matrix.pgversion }}
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4
+
+    - name: install pg ${{ matrix.pgversion }}
+      run: |
+        sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -v $PGVERSION -p -i
+        sudo -u postgres createuser -s "$USER"
+
+    - name: build on pg ${{ matrix.pgversion }}
+      run: |
+        make PROFILE="-Werror"
+        sudo -E make install
+
+    - name: test on pg ${{ matrix.pgversion }}
+      run: |
+        sudo pg_conftool $PGVERSION main set shared_preload_libraries pg_extension_template
+        sudo service postgresql restart
+        make installcheck
+
+    - name: show regression diffs on pg ${{ matrix.pgversion }}
+      if: ${{ failure() }}
+      run: |
+        cat regression.diffs
