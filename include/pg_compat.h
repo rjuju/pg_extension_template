@@ -14,6 +14,12 @@
 #error Major version not supported
 #endif
 
+/*--- Variables exported ---*/
+
+extern bool my_bool_guc;
+extern int	my_int_guc;
+extern char *my_string_guc;
+
 /*--- Some general backwards compatibility macros ---*/
 
 #if PG_VERSION_NUM < 150000
