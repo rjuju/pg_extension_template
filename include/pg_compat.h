@@ -38,7 +38,14 @@ extern char *my_string_guc;
 /* end of ExecutorStart hook */
 
 /* ExecutorRun hook */
-#if PG_VERSION_NUM >= 100000
+#if PG_VERSION_NUM >= 180000
+#define EXECUTOR_RUN_HOOK_ARGS QueryDesc *queryDesc, \
+							ScanDirection direction, \
+							uint64 count
+#define EXECUTOR_RUN_HOOK_ARG_NAMES queryDesc, \
+							direction, \
+							count
+#else
 #define EXECUTOR_RUN_HOOK_ARGS QueryDesc *queryDesc, \
 							ScanDirection direction, \
 							uint64 count, \
