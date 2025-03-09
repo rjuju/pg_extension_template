@@ -29,6 +29,11 @@ extern char *my_string_guc;
 /*--- Hooks prototypes and argument names ---*/
 
 /* ExecutorStart hook */
+#if PG_VERSION_NUM >= 180000
+#define EXEC_START_RET	bool
+#else
+#define EXEC_START_RET	void
+#endif
 #if PG_VERSION_NUM >= 100000
 #define EXECUTOR_START_HOOK_ARGS QueryDesc *queryDesc, \
 							int eflags

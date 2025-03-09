@@ -56,7 +56,7 @@ static pgetSharedState *pget = NULL;
 
 PGDLLEXPORT void _PG_init(void);
 
-static void pget_ExecutorStart_hook(EXECUTOR_START_HOOK_ARGS);
+static EXEC_START_RET pget_ExecutorStart_hook(EXECUTOR_START_HOOK_ARGS);
 static ExecutorStart_hook_type prev_ExecutorStart = NULL;
 
 static void pget_ExecutorRun_hook(EXECUTOR_RUN_HOOK_ARGS);
@@ -191,13 +191,13 @@ _PG_init(void)
 /*
  * ExecutorStart hook
  */
-static void
+static EXEC_START_RET
 pget_ExecutorStart_hook(EXECUTOR_START_HOOK_ARGS)
 {
 	if (prev_ExecutorStart)
-		prev_ExecutorStart(EXECUTOR_START_HOOK_ARG_NAMES);
+		return prev_ExecutorStart(EXECUTOR_START_HOOK_ARG_NAMES);
 	else
-		standard_ExecutorStart(EXECUTOR_START_HOOK_ARG_NAMES);
+		return standard_ExecutorStart(EXECUTOR_START_HOOK_ARG_NAMES);
 }
 
 /*
